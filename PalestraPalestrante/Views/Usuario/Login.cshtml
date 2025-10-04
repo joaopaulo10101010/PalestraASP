@@ -1,0 +1,189 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - PalestraCon</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- CSS Personalizado -->
+    <link href="~/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <a class="nav-link text-dark" asp-area="" asp-controller="ListaEvento" asp-action="ListaGeral">SITEPARTEPESQUISA</a>
+    <div class="login-container">
+        <div class="login-wrapper">
+            <!-- Left Side - Form -->
+            <div class="login-form-section">
+                <div class="login-form-container">
+                    <!-- Header -->
+                    <div class="login-header text-center mb-5">
+                        <a href="/" class="login-logo">
+                            <i class="fas fa-chalkboard-teacher me-2"></i>
+                            <span>PalestraCon</span>
+                        </a>
+                        <h1 class="login-title">Bem-vindo de volta</h1>
+                        <p class="login-subtitle">Entre na sua conta para continuar sua jornada de conhecimento</p>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="loginForm" class="login-form">
+                        <!-- CPF Field -->
+                        <div class="form-group-floating mb-4">
+                            <input type="text"
+                                   class="form-control form-control-custom"
+                                   id="cpf"
+                                   placeholder=" "
+                                   required
+                                   maxlength="14">
+                            <label for="cpf">
+                                <i class="fas fa-id-card me-2"></i>CPF
+                            </label>
+                            <div class="cpf-counter" id="cpfCounter">0/11 dígitos</div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="form-group-floating mb-4">
+                            <input type="password"
+                                   class="form-control form-control-custom"
+                                   id="senha"
+                                   placeholder=" "
+                                   required
+                                   maxlength="50">
+                            <label for="senha">
+                                <i class="fas fa-lock me-2"></i>Senha
+                            </label>
+                        </div>
+
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="lembrar">
+                                <label class="form-check-label" for="lembrar">
+                                    Lembrar-me
+                                </label>
+                            </div>
+                            <a href="/recuperar-senha" class="forgot-password">
+                                Esqueceu a senha?
+                            </a>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary-custom btn-lg w-100 mb-4">
+                            <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                        </button>
+
+                        <!-- Register Link -->
+                        <div class="text-center">
+                            <p class="register-text">
+                                Não tem uma conta?
+                                <a class="register-link" asp-area="" asp-controller="Usuario" asp-action="CadastrarUsuario">
+                                    Cadastre-se agora
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Side - Banner -->
+            <div class="login-banner-section">
+                <div class="login-banner-content">
+                    <!-- Carousel -->
+                    <div id="loginCarousel" class="carousel slide carousel-custom" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#loginCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#loginCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#loginCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../assets/image/carrosel/carrosel1.jpeg" class="d-block w-100" alt="Palestra 1">
+                                <div class="carousel-caption">
+                                    <h3>Conhecimento que Transforma</h3>
+                                    <p>Participe das melhores palestras com especialistas renomados</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../assets/image/carrosel/carrosel2.png" class="d-block w-100" alt="Palestra 2">
+                                <div class="carousel-caption">
+                                    <h3>Networking de Qualidade</h3>
+                                    <p>Conecte-se com profissionais e expanda sua rede</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../assets/image/carrosel/carrosel3.webp" class="d-block w-100" alt="Palestra 3">
+                                <div class="carousel-caption">
+                                    <h3>Aprendizado Contínuo</h3>
+                                    <p>Desenvolva novas habilidades e evolua profissionalmente</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Features List -->
+                    <div class="banner-features">
+                        <h4>Por que fazer parte da PalestraCon?</h4>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h6>Certificados Reconhecidos</h6>
+                                    <small>Valide sua participação em eventos</small>
+                                </div>
+                            </div>
+
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h6>Gravações Exclusivas</h6>
+                                    <small>Acesso ao conteúdo por 30 dias</small>
+                                </div>
+                            </div>
+
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h6>Comunidade Ativa</h6>
+                                    <small>Network com milhares de profissionais</small>
+                                </div>
+                            </div>
+
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h6>Eventos Exclusivos</h6>
+                                    <small>Palestras com os melhores especialistas</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript Personalizado -->
+    <script src="~/js/login.js"></script>
+</body>
+</html>

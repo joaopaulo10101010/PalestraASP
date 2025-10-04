@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Database\SQLScripts\**" />
+    <Content Remove="Database\SQLScripts\**" />
+    <EmbeddedResource Remove="Database\SQLScripts\**" />
+    <None Remove="Database\SQLScripts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MySql.Data" Version="9.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\SQLScripts\" />
+    <Folder Include="wwwroot\assets\image\home\" />
   </ItemGroup>
 
 </Project>

@@ -1,34 +1,48 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Crypto.Generators;
+using PalestraPalestrante.Repositorio;
+using PalestraPalestrante.Models;
 
 namespace PalestraPalestrante.Controllers
 {
     public class UsuarioController : Controller
     {
-        private readonly Database db = new Database();
+        private readonly UsuarioRepositorio usuarioRepositorio;
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult CriarUsuario()
+        public IActionResult CadastrarUsuario()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult CriarUsuario(Usuarios vm)
+        public IActionResult CadastrarUsuario(string nome, string cpf, string email, string tipoUsuario, string senha, string confirmarSenha)
         {
-            using var conn = db.GetConnection();
-            using var cmd = new MySqlCommand("sp_usuario_criar", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("p_nome", vm.nome);
-            cmd.Parameters.AddWithValue("p_email", vm.email);
-            cmd.Parameters.AddWithValue("p_senha_hash", BCrypt.Net.BCrypt.HashPassword(vm.senha_hash, workFactor: 12));
-            cmd.Parameters.AddWithValue("p_role", vm.role);
-            cmd.ExecuteNonQuery();
-            return RedirectToAction("CriarUsuario");
+            Console.WriteLine($"O Nome: {nome}\nO Cpf: {cpf}\nO Email: {email}\nO TipoUsuario: {tipoUsuario}\nO Senha: {senha}\nO ConfirmarSenha: {confirmarSenha}\n");
+
+            if (senha == confirmarSenha)
+            {
+                Usuario usuario = new Usuario(nome, cpf, email, senha, tipoUsuario);
+                usuarioRepositorio.CadastrarNovoUsuarioBase(usuario);
+                ViewBag.CadastroLog = "Cadastro Realizado com sucesso";
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                ViewBag.CadastroLog = "As senhas não são iguais, confirme elas novamente";
+                return View();
+            }
+
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
     }
 }

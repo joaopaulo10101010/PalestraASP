@@ -1,0 +1,261 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - PalestraCon</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- CSS Personalizado -->
+    <link href="~/css/listageral.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" class="sidebar-logo">
+                    <i class="fas fa-chalkboard-teacher me-2"></i>
+                    <span>PalestraCon</span>
+                </a>
+            </div>
+
+            <!-- Perfil do Usuário -->
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <img src="../assets/image/avatar/default-avatar.png" alt="Avatar" id="userAvatar">
+                    <div class="online-status"></div>
+                </div>
+                <div class="user-info">
+                    <h5 id="userName">Carlos Silva</h5>
+                    <p id="userEmail">carlos.silva@email.com</p>
+                    <div class="user-details">
+                        <div class="user-detail">
+                            <i class="fas fa-id-card"></i>
+                            <span id="userCPF">123.456.789-00</span>
+                        </div>
+                        <div class="user-detail">
+                            <i class="fas fa-briefcase"></i>
+                            <span id="userCargo">Participante</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu de Navegação -->
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Minhas Inscrições</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-certificate"></i>
+                            <span>Meus Certificados</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Configurações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Status do Perfil -->
+            <div class="profile-status">
+                <div class="status-item">
+                    <div class="status-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="status-info">
+                        <h6>15</h6>
+                        <span>Palestras</span>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <div class="status-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="status-info">
+                        <h6>12</h6>
+                        <span>Certificados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar palestras...">
+                        <button class="clear-search" id="clearSearch">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="top-bar-actions">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-greeting">
+                            <span>Olá, <strong id="greetingName">Carlos</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="banner-content">
+                        <h2>Bem-vindo de volta, <span id="bannerUserName">Carlos</span>! 👋</h2>
+                        <p>Continue sua jornada de conhecimento. Novas palestras incríveis te aguardam!</p>
+                    </div>
+                    <div class="banner-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <h4 id="upcomingEvents">8</h4>
+                                <span>Próximos Eventos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="filters-section">
+                    <div class="filter-group">
+                        <label for="categoryFilter">Categoria:</label>
+                        <select id="categoryFilter" class="form-select">
+                            <option value="">Todas as categorias</option>
+                            <option value="Tecnologia">Tecnologia</option>
+                            <option value="Liderança">Liderança</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Desenvolvimento Pessoal">Desenvolvimento Pessoal</option>
+                            <option value="Negócios">Negócios</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="dateFilter">Data:</label>
+                        <select id="dateFilter" class="form-select">
+                            <option value="">Todas as datas</option>
+                            <option value="today">Hoje</option>
+                            <option value="week">Esta semana</option>
+                            <option value="month">Este mês</option>
+                            <option value="upcoming">Futuros</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="typeFilter">Tipo:</label>
+                        <select id="typeFilter" class="form-select">
+                            <option value="">Todos os tipos</option>
+                            <option value="online">Online</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="hibrido">Híbrido</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-outline-secondary" id="clearFilters">
+                        <i class="fas fa-times"></i> Limpar Filtros
+                    </button>
+                </div>
+
+                <!-- Palestras Grid -->
+                <div class="section-header">
+                    <h3>Palestras Disponíveis</h3>
+                    <p>Encontre o próximo evento que vai transformar sua carreira</p>
+                </div>
+
+                <div class="palestras-grid" id="palestrasGrid">
+                    <!-- Os cards serão inseridos aqui via JavaScript -->
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="spinner"></div>
+                    <p>Carregando palestras...</p>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h4>Nenhuma palestra encontrada</h4>
+                    <p>Tente ajustar os filtros ou termos de busca</p>
+                    <button class="btn btn-primary-custom" id="resetSearch">
+                        <i class="fas fa-redo"></i> Limpar Busca
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação de Inscrição -->
+    <div class="modal fade" id="inscricaoModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Inscrição</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Você está prestes a se inscrever na palestra:</p>
+                    <h6 id="modalPalestraNome" class="text-primary"></h6>
+                    <p class="text-muted" id="modalPalestraData"></p>
+                    <div class="alert alert-info mt-3">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Você receberá um e-mail de confirmação com os detalhes do evento.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary-custom" id="confirmInscricao">
+                        <i class="fas fa-check me-2"></i>Confirmar Inscrição
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript Personalizado -->
+    <script src="~/js/listageral.js"></script>
+</body>
+</html>

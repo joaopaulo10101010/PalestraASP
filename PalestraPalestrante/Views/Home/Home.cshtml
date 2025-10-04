@@ -1,0 +1,410 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PalestraCon - Sua Plataforma de Conhecimento</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- CSS Personalizado -->
+    <link href="~/css/home.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-chalkboard-teacher me-2"></i>
+                <strong>PalestraCon</strong>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#palestras">Palestras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#palestrantes">Palestrantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex">
+                    <a class="btn btn-outline-light me-2" asp-area="" asp-controller="Usuario" asp-action="CadastrarUsuario">
+                        <i class="fas fa-user-plus me-1" style="color: orange;"></i>Cadastrar
+                    </a>
+                    <a class="btn btn-primary-custom" asp-area="" asp-controller="Usuario" asp-action="Login">
+                        <i class="fas fa-sign-in-alt me-1"></i>Entrar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">
+                        Conecte-se ao <span class="text-highlight">conhecimento</span> que transforma
+                    </h1>
+                    <p class="hero-subtitle">
+                        Participe das melhores palestras com especialistas renomados.
+                        Aprenda, networke e evolua profissionalmente.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#palestras" class="btn btn-primary-custom btn-lg me-3">
+                            <i class="fas fa-calendar-alt me-2"></i>Ver Palestras
+                        </a>
+                        <a href="/cadastrarusuario" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-rocket me-2"></i>Começar Agora
+                        </a>
+                    </div>
+
+                    <div class="hero-stats mt-5">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <h3>500+</h3>
+                                    <p>Palestras</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <h3>10K+</h3>
+                                    <p>Participantes</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <h3>50+</h3>
+                                    <p>Especialistas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <img src="../assets/image/home/hero-image.svg" alt="Palestras e Conhecimento" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Palestras em Destaque -->
+    <section id="palestras" class="section-palestras">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Próximas Palestras</h2>
+                <p class="section-subtitle">Não perca essas oportunidades incríveis de aprendizado</p>
+            </div>
+
+            <div class="row">
+                <!-- Palestra 1 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="palestra-card">
+                        <div class="palestra-image">
+                            <img src="../assets/image/palestras/tech-innovation.jpg" alt="Inovação Tecnológica">
+                            <div class="palestra-badge">Tecnologia</div>
+                        </div>
+                        <div class="palestra-content">
+                            <h4>Inovação Tecnológica 2024</h4>
+                            <p class="palestra-info">
+                                <i class="fas fa-calendar me-2"></i>15 Dez, 2024
+                                <br>
+                                <i class="fas fa-clock me-2"></i>14:00 - 17:00
+                                <br>
+                                <i class="fas fa-map-marker-alt me-2"></i>Online
+                            </p>
+                            <p class="palestra-desc">
+                                Descubra as tendências tecnológicas que vão moldar o futuro dos negócios.
+                            </p>
+                            <div class="palestra-footer">
+                                <span class="palestra-price">Grátis</span>
+                                <a href="#" class="btn btn-primary-custom btn-sm">Inscrever-se</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Palestra 2 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="palestra-card featured">
+                        <div class="palestra-image">
+                            <img src="../assets/image/palestras/leadership.jpg" alt="Liderança Moderna">
+                            <div class="palestra-badge">Liderança</div>
+                            <div class="featured-badge">Destaque</div>
+                        </div>
+                        <div class="palestra-content">
+                            <h4>Liderança no Século XXI</h4>
+                            <p class="palestra-info">
+                                <i class="fas fa-calendar me-2"></i>20 Dez, 2024
+                                <br>
+                                <i class="fas fa-clock me-2"></i>09:00 - 12:00
+                                <br>
+                                <i class="fas fa-map-marker-alt me-2"></i>São Paulo - SP
+                            </p>
+                            <p class="palestra-desc">
+                                Estratégias modernas de liderança para times remotos e diversificados.
+                            </p>
+                            <div class="palestra-footer">
+                                <span class="palestra-price">R$ 89,90</span>
+                                <a href="#" class="btn btn-primary-custom btn-sm">Inscrever-se</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Palestra 3 -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="palestra-card">
+                        <div class="palestra-image">
+                            <img src="../assets/image/palestras/sustainability.jpg" alt="Sustentabilidade">
+                            <div class="palestra-badge">Sustentabilidade</div>
+                        </div>
+                        <div class="palestra-content">
+                            <h4>Sustentabilidade Corporativa</h4>
+                            <p class="palestra-info">
+                                <i class="fas fa-calendar me-2"></i>22 Dez, 2024
+                                <br>
+                                <i class="fas fa-clock me-2"></i>16:00 - 18:00
+                                <br>
+                                <i class="fas fa-map-marker-alt me-2"></i>Online
+                            </p>
+                            <p class="palestra-desc">
+                                Como implementar práticas sustentáveis que geram valor para o negócio.
+                            </p>
+                            <div class="palestra-footer">
+                                <span class="palestra-price">R$ 49,90</span>
+                                <a href="#" class="btn btn-primary-custom btn-sm">Inscrever-se</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="/palestras" class="btn btn-outline-primary-custom">
+                    <i class="fas fa-list me-2"></i>Ver Todas as Palestras
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por que Participar -->
+    <section class="section-benefits">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Por que participar das nossas palestras?</h2>
+                    <p class="section-subtitle">Oferecemos uma experiência completa de aprendizado e networking</p>
+
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h5>Networking de Qualidade</h5>
+                                <p>Conecte-se com profissionais e especialistas do mercado</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h5>Certificado Reconhecido</h5>
+                                <p>Receba certificado de participação válido em todo território nacional</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h5>Gravação Disponível</h5>
+                                <p>Acesso à gravação da palestra por 30 dias após o evento</p>
+                            </div>
+                        </div>
+
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h5>Interação com Palestrantes</h5>
+                                <p>Opportunidade de tirar dúvidas diretamente com os especialistas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="benefits-image">
+                        <img src="../assets/image/home/benefits-image.svg" alt="Benefícios" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Palestrantes -->
+    <section id="palestrantes" class="section-palestrantes">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Nossos Palestrantes</h2>
+                <p class="section-subtitle">Conheça alguns dos especialistas que compartilham conhecimento conosco</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="palestrante-card text-center">
+                        <div class="palestrante-image">
+                            <img src="../assets/image/palestrantes/palestrante1.jpg" alt="Dr. Carlos Silva">
+                        </div>
+                        <h5>Dr. Carlos Silva</h5>
+                        <p class="palestrante-area">Especialista em Inovação</p>
+                        <p class="palestrante-bio">15+ anos transformando empresas através da tecnologia</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="palestrante-card text-center">
+                        <div class="palestrante-image">
+                            <img src="../assets/image/palestrantes/palestrante2.jpg" alt="Dra. Maria Santos">
+                        </div>
+                        <h5>Dra. Maria Santos</h5>
+                        <p class="palestrante-area">Liderança e Gestão</p>
+                        <p class="palestrante-bio">Consultora executiva com foco em desenvolvimento de líderes</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="palestrante-card text-center">
+                        <div class="palestrante-image">
+                            <img src="../assets/image/palestrantes/palestrante3.jpg" alt="Prof. João Oliveira">
+                        </div>
+                        <h5>Prof. João Oliveira</h5>
+                        <p class="palestrante-area">Sustentabilidade</p>
+                        <p class="palestrante-bio">Pioneiro em práticas ESG no setor corporativo brasileiro</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="palestrante-card text-center">
+                        <div class="palestrante-image">
+                            <img src="../assets/image/palestrantes/palestrante4.jpg" alt="Ana Costa">
+                        </div>
+                        <h5>Ana Costa</h5>
+                        <p class="palestrante-area">Marketing Digital</p>
+                        <p class="palestrante-bio">Estrategista digital com cases internacionais de sucesso</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-content text-center">
+                <h2>Pronto para expandir seu conhecimento?</h2>
+                <p>Junte-se a milhares de profissionais que já transformaram suas carreiras</p>
+                <div class="cta-buttons">
+                    <a href="/cadastrarusuario" class="btn btn-primary-custom btn-lg me-3">
+                        <i class="fas fa-user-plus me-2"></i>Criar Minha Conta
+                    </a>
+                    <a href="#palestras" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-calendar me-2"></i>Explorar Palestras
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5><i class="fas fa-chalkboard-teacher me-2"></i>PalestraCon</h5>
+                    <p>Conectando pessoas ao conhecimento que transforma vidas e carreiras.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6>Navegação</h6>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#palestras">Palestras</a></li>
+                        <li><a href="#palestrantes">Palestrantes</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6>Links Úteis</h6>
+                    <ul class="footer-links">
+                        <li><a href="/cadastrarusuario">Cadastrar</a></li>
+                        <li><a asp-area="" asp-controller="Usuario" asp-action="Login">Login</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+                    <h6>Contato</h6>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope me-2"></i>contato@palestracon.com</li>
+                        <li><i class="fas fa-phone me-2"></i>(11) 9999-9999</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>São Paulo - SP</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom text-center">
+                <p>&copy; 2024 PalestraCon. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript Personalizado -->
+    <script src="~/js/home.js"></script>
+</body>
+</html>

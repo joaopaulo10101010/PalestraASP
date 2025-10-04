@@ -1,0 +1,408 @@
+﻿:root {
+    --primary-color: #e67e22; /* Laranja principal */
+    --secondary-color: #27ae60; /* Verde principal */
+    --accent-color: #d35400; /* Laranja escuro */
+    --light-bg: #fef9f3; /* Fundo claro laranja suave */
+}
+
+body {
+    background: linear-gradient(135deg, #f39c12 0%, #27ae60 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 15px;
+}
+
+.card-custom {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.bordapreta {
+    border: 2px solid black;
+}
+
+.header-gradient {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+/* Estilos do Carousel */
+.carousel-custom {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-inner {
+    border-radius: 12px;
+}
+
+.carousel-item {
+    height: 250px;
+    border-radius: 12px;
+}
+
+    .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 15px;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+.carousel-indicators {
+    bottom: 10px;
+}
+
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 5px;
+    }
+
+.form-control-custom {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+    .form-control-custom:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(230, 126, 34, 0.25);
+    }
+
+.form-select-custom {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+    .form-select-custom:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(230, 126, 34, 0.25);
+    }
+
+.btn-primary-custom {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+.btn-secondary-custom {
+    background: var(--secondary-color);
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .btn-secondary-custom:hover {
+        background: #219653;
+        transform: translateY(-2px);
+    }
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+    .feature-item:hover {
+        background: rgba(230, 126, 34, 0.1);
+    }
+
+.password-strength {
+    height: 4px;
+    border-radius: 4px;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+.floating-label {
+    position: relative;
+    margin-bottom: 1.2rem;
+}
+
+    .floating-label .form-control,
+    .floating-label .form-select {
+        height: 55px;
+        padding-top: 18px;
+    }
+
+    .floating-label label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        padding: 18px 15px;
+        pointer-events: none;
+        border: 1px solid transparent;
+        transform-origin: 0 0;
+        transition: all 0.3s ease;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+
+    .floating-label .form-control:focus ~ label,
+    .floating-label .form-control:not(:placeholder-shown) ~ label,
+    .floating-label .form-select:focus ~ label,
+    .floating-label .form-select:not([value=""]):valid ~ label {
+        transform: scale(0.85) translateY(-0.4rem) translateX(0.15rem);
+        color: var(--primary-color);
+    }
+
+.event-highlight {
+    background: linear-gradient(45deg, #fff8f0, #f0fff8);
+    border-left: 4px solid var(--primary-color);
+    padding: 12px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+}
+
+.countdown {
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-type-info {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 10px;
+    border-left: 4px solid var(--secondary-color);
+    font-size: 0.85rem;
+}
+
+.cpf-counter {
+    font-size: 0.75rem;
+    color: #6c757d;
+    text-align: right;
+    margin-top: 2px;
+}
+
+    .cpf-counter.warning {
+        color: #dc3545;
+    }
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .card-body {
+        padding: 20px !important;
+    }
+
+    .header-gradient .row {
+        text-align: center;
+    }
+
+    .header-gradient .text-md-end {
+        text-align: center !important;
+        margin-top: 10px;
+    }
+
+    .border-start {
+        border-left: none !important;
+        border-top: 1px solid #dee2e6;
+        padding-top: 25px;
+        margin-top: 25px;
+    }
+
+    .btn-primary-custom,
+    .btn-secondary-custom {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .d-md-flex .me-md-2 {
+        margin-right: 0 !important;
+    }
+
+    .feature-item {
+        padding: 8px;
+    }
+
+    .floating-label .form-control,
+    .floating-label .form-select {
+        height: 50px;
+        padding-top: 16px;
+    }
+
+    .floating-label label {
+        padding: 16px 15px;
+        font-size: 0.85rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        font-size: 1.3rem;
+    }
+
+    h5 {
+        font-size: 1.2rem;
+    }
+
+    /* Carousel mobile */
+    .carousel-item {
+        height: 200px;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 35px;
+        height: 35px;
+        margin: 0 10px;
+    }
+}
+
+/* Responsividade para tablets */
+@media (max-width: 992px) and (min-width: 769px) {
+    .card-body {
+        padding: 30px !important;
+    }
+
+    .feature-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    .carousel-item {
+        height: 220px;
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media (max-width: 576px) {
+    .container {
+        padding: 0;
+    }
+
+    .card-custom {
+        border-radius: 10px;
+    }
+
+    .header-gradient {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .event-highlight {
+        padding: 10px;
+    }
+
+    .user-type-info {
+        padding: 10px;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .feature-icon {
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+
+    .carousel-item {
+        height: 180px;
+    }
+
+    .carousel-custom {
+        margin-bottom: 20px;
+    }
+}
+
+/* Ajustes para orientação landscape em mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    body {
+        padding: 10px 0;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .card-body {
+        padding: 15px !important;
+    }
+
+    .floating-label {
+        margin-bottom: 0.8rem;
+    }
+
+    .carousel-item {
+        height: 150px;
+    }
+}
+
+/* Ajustes para telas grandes */
+@media (min-width: 1200px) {
+    .carousel-item {
+        height: 300px;
+    }
+}

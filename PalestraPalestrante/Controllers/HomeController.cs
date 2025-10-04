@@ -15,6 +15,11 @@ namespace PalestraPalestrante.Controllers
 
         public IActionResult Index()
         {
+            return RedirectToAction("Home");
+        }
+
+        public IActionResult Home()
+        {
             return View();
         }
 

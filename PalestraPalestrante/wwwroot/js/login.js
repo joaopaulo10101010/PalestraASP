@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Verificar senha
             const senha = document.getElementById('senha').value;
-            if (senha.length < 6) {
-                showAlert('A senha deve ter pelo menos 6 caracteres.', 'error');
+            if (senha.length < 1) {
+                showAlert('A senha deve ter pelo menos 1 caracteres.', 'error');
                 document.getElementById('senha').focus();
                 e.preventDefault(); // Só previne se houver erro
                 return;

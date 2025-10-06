@@ -4,8 +4,10 @@ use db_palestra;
 
 create table Eventos(
 	id_evento int auto_increment,
-    nome varchar(255) not null,
+    nome_evento varchar(255) not null,
+    nome_area varchar(255),
     data date not null,
+    inscricao_ativa bool,
     imagem_evento longblob,
     primary key(id_evento)
 );
@@ -40,9 +42,14 @@ create table Palestras(
 create table Usuario(
 	cpf_usuario char(11),
     nome_usuario varchar(255),
+    email_usuario varchar(255),
     senha_usuario varchar(500),
     cargo_usuario enum('Admin','Participante','Publico') default 'Publico',
 	data_cadastro_usuario datetime default current_timestamp,
     primary key(cpf_usuario)
 );
 
+insert into Usuario(cpf_usuario,nome_usuario,email_usuario,senha_usuario) values
+("","","","");
+
+select * from usuario;

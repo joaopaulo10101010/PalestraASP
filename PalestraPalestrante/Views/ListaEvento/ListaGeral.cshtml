@@ -1,4 +1,5 @@
-﻿@{
+﻿@using PalestraPalestrante.Authenticacao;
+@{
     Layout = null;
 }
 
@@ -32,20 +33,22 @@
             <!-- Perfil do Usuário -->
             <div class="user-profile">
                 <div class="user-avatar">
-                    <img src="../assets/image/avatar/default-avatar.png" alt="Avatar" id="userAvatar">
+                    <img src="../assets/image/listageral/do-utilizador.png" alt="Avatar" id="userAvatar">
                     <div class="online-status"></div>
                 </div>
                 <div class="user-info">
-                    <h5 id="userName">Carlos Silva</h5>
-                    <p id="userEmail">carlos.silva@email.com</p>
+                    <h5 id="userName">
+                        @Context.Session.GetString(SessionKeys.nome_usuario)
+                    </h5>
+                    <p id="userEmail">@Context.Session.GetString(SessionKeys.email_usuario)</p>
                     <div class="user-details">
                         <div class="user-detail">
                             <i class="fas fa-id-card"></i>
-                            <span id="userCPF">123.456.789-00</span>
+                            <span id="userCPF">@Context.Session.GetString(SessionKeys.cpf_usuario)</span>
                         </div>
                         <div class="user-detail">
                             <i class="fas fa-briefcase"></i>
-                            <span id="userCargo">Participante</span>
+                            <span id="userCargo">@Context.Session.GetString(SessionKeys.cargo_usuario)</span>
                         </div>
                     </div>
                 </div>
@@ -131,7 +134,7 @@
                     </div>
                     <div class="user-menu">
                         <div class="user-greeting">
-                            <span>Olá, <strong id="greetingName">Carlos</strong></span>
+                            <span>Olá, <strong id="greetingName">@Context.Session.GetString(SessionKeys.nome_usuario)</strong></span>
                         </div>
                     </div>
                 </div>
@@ -142,7 +145,7 @@
                 <!-- Welcome Banner -->
                 <div class="welcome-banner">
                     <div class="banner-content">
-                        <h2>Bem-vindo de volta, <span id="bannerUserName">Carlos</span>! 👋</h2>
+                        <h2>Bem-vindo de volta, <span id="bannerUserName">@Context.Session.GetString(SessionKeys.nome_usuario)</span>! 👋</h2>
                         <p>Continue sua jornada de conhecimento. Novas palestras incríveis te aguardam!</p>
                     </div>
                     <div class="banner-stats">

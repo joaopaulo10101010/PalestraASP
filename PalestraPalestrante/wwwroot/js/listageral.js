@@ -80,18 +80,9 @@ const palestrasData = [
     }
 ];
 
-// Dados do usuário (em produção, viriam do backend após login)
-const userData = {
-    nome: "Carlos Silva",
-    email: "carlos.silva@email.com",
-    cpf: "123.456.789-00",
-    cargo: "Participante",
-    avatar: "../assets/image/avatar/default-avatar.png"
-};
 
 document.addEventListener('DOMContentLoaded', function () {
     // Inicializar dados do usuário
-    initializeUserData();
 
     // Carregar palestras
     loadPalestras();
@@ -102,16 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Configurar busca e filtros
     setupSearchAndFilters();
 });
-
-function initializeUserData() {
-    document.getElementById('userName').textContent = userData.nome;
-    document.getElementById('userEmail').textContent = userData.email;
-    document.getElementById('userCPF').textContent = userData.cpf;
-    document.getElementById('userCargo').textContent = userData.cargo;
-    document.getElementById('greetingName').textContent = userData.nome.split(' ')[0];
-    document.getElementById('bannerUserName').textContent = userData.nome.split(' ')[0];
-    document.getElementById('userAvatar').src = userData.avatar;
-}
 
 function loadPalestras(palestras = palestrasData) {
     const grid = document.getElementById('palestrasGrid');

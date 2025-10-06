@@ -166,11 +166,19 @@ body {
         background: rgba(230, 126, 34, 0.1);
     }
 
-.password-strength {
+.password-strength-container {
     height: 4px;
+    background-color: #e9ecef;
     border-radius: 4px;
     margin-top: 5px;
+    overflow: hidden;
+}
+
+.password-strength {
+    height: 100%;
+    border-radius: 4px;
     transition: all 0.3s ease;
+    width: 0%;
 }
 
 .floating-label {
@@ -241,6 +249,7 @@ body {
 
     .cpf-counter.warning {
         color: #dc3545;
+        font-weight: bold;
     }
 
 /* Responsividade para mobile */

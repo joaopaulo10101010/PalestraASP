@@ -1,16 +1,20 @@
-﻿using System.Configuration;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using MySql.Data.MySqlClient;
+using PalestraPalestrante.Authenticacao;
 using PalestraPalestrante.Database;
 using PalestraPalestrante.Models;
+using System.Configuration;
+using PalestraPalestrante.Authenticacao;
+using System.Data;
 
 namespace PalestraPalestrante.Repositorio
 {
     public class UsuarioRepositorio
     {
         private readonly string _connectionString = "";
-        public UsuarioRepositorio(IConfiguration configuration)
+        public UsuarioRepositorio(string connection)
         {
-            _connectionString = configuration.GetConnectionString("MySQLConnection") ?? "";
+            _connectionString = connection;
         }
 
         public bool CadastrarNovoUsuarioBase(Usuario usuario)
@@ -37,5 +41,45 @@ namespace PalestraPalestrante.Repositorio
                 return false;
             }
         }
+
+        public Usuario RealizarLoginUsuario(Usuario usuario)
+        {
+            try
+            {
+                using (Conexao db = new Conexao(_connectionString))
+                {
+                    using (MySqlCommand cmd = db.MySqlCommand())
+                    {
+                        cmd.CommandText = "select * from Usuario where cpf_usuario=@cpf";
+                        cmd.Parameters.AddWithValue("@cpf", usuario.GetCpf());
+                        var rd = cmd.ExecuteReader();
+                        if (rd.Read())
+                        {
+                            Usuario dbusuario = new Usuario(
+                                rd.GetString("cpf_usuario"),
+                                rd.GetString("nome_usuario"),
+                                rd.GetString("email_usuario"),
+                                rd.GetString("senha_usuario"),
+                                rd.GetString("cargo_usuario")
+                                );
+                            dbusuario.SetDataCadastro(rd.GetDateTime("data_cadastro_usuario"));
+
+                            if(usuario.GetSenha() == dbusuario.GetSenha())
+                            {
+                                return dbusuario;
+                            }
+                            
+                        }
+                        return null;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+                return null;
+            }
+        }
+
     }
 }

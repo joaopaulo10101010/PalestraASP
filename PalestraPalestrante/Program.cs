@@ -2,8 +2,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession(o =>
+{
+    o.Cookie.Name = "Palestra.Session";
+    o.IdleTimeout = TimeSpan.FromHours(8);
+    o.Cookie.HttpOnly = true;
+    o.Cookie.IsEssential = true;
+});
+
+builder.Services.AddDistributedMemoryCache(); /* Necessário para armazenar dados na memória*/
+builder.Services.AddSession(); /* Habilita a funcionalidade de sessão */
+builder.Services.AddHttpContextAccessor(); /* Permite injetar HttpContext nas views  */
 
 var app = builder.Build();
+
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

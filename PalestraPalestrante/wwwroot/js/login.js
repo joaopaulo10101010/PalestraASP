@@ -5,102 +5,88 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('loginForm');
 
     // Formatação do CPF
-    cpfInput.addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
+    if (cpfInput) {
+        cpfInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
 
-        // Limitar a 11 dígitos numéricos
-        if (value.length > 11) {
-            value = value.substring(0, 11);
-        }
+            // Limitar a 11 dígitos numéricos
+            if (value.length > 11) {
+                value = value.substring(0, 11);
+            }
 
-        // Aplicar formatação
-        if (value.length <= 11) {
-            value = value.replace(/(\d{3})(\d)/, '$1.$2')
-                .replace(/(\d{3})(\d)/, '$1.$2')
-                .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            e.target.value = value;
-        }
+            // Aplicar formatação
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d)/, '$1.$2')
+                    .replace(/(\d{3})(\d)/, '$1.$2')
+                    .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                e.target.value = value;
+            }
 
-        // Atualizar contador
-        const digitCount = value.replace(/\D/g, '').length;
-        cpfCounter.textContent = `${digitCount}/11 dígitos`;
+            // Atualizar contador
+            const digitCount = value.replace(/\D/g, '').length;
+            if (cpfCounter) {
+                cpfCounter.textContent = `${digitCount}/11 dígitos`;
 
-        // Mudar cor do contador quando atingir o limite
-        if (digitCount === 11) {
-            cpfCounter.classList.add('warning');
-        } else {
-            cpfCounter.classList.remove('warning');
-        }
-    });
+                // Mudar cor do contador quando atingir o limite
+                if (digitCount === 11) {
+                    cpfCounter.classList.add('warning');
+                } else {
+                    cpfCounter.classList.remove('warning');
+                }
+            }
+        });
 
-    // Prevenir entrada de mais de 14 caracteres
-    cpfInput.addEventListener('keydown', function (e) {
-        const currentValue = this.value.replace(/\D/g, '');
-        if (currentValue.length >= 11 &&
-            e.key !== 'Backspace' &&
-            e.key !== 'Delete' &&
-            e.key !== 'Tab' &&
-            !e.metaKey) {
-            e.preventDefault();
-        }
-    });
+        // Prevenir entrada de mais de 14 caracteres
+        cpfInput.addEventListener('keydown', function (e) {
+            const currentValue = this.value.replace(/\D/g, '');
+            if (currentValue.length >= 11 &&
+                e.key !== 'Backspace' &&
+                e.key !== 'Delete' &&
+                e.key !== 'Tab' &&
+                !e.metaKey) {
+                e.preventDefault();
+            }
+        });
+    }
 
     // Validação do formulário de login
-    loginForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        // Verificar CPF
-        const cpf = cpfInput.value.replace(/\D/g, '');
-        if (cpf.length !== 11) {
-            showAlert('CPF deve conter exatamente 11 dígitos.', 'error');
-            cpfInput.focus();
-            return;
-        }
-
-        // Verificar senha
-        const senha = document.getElementById('senha').value;
-        if (senha.length < 6) {
-            showAlert('A senha deve ter pelo menos 6 caracteres.', 'error');
-            document.getElementById('senha').focus();
-            return;
-        }
-
-        // Simular processo de login
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-
-        // Mostrar loading
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Entrando...';
-        submitBtn.disabled = true;
-
-        // Simular requisição AJAX
-        setTimeout(() => {
-            // Aqui você faria a requisição real para o backend
-            const loginSuccess = simulateLogin(cpf, senha);
-
-            if (loginSuccess) {
-                showAlert('Login realizado com sucesso! Redirecionando...', 'success');
-
-                // Redirecionar para a página inicial após 2 segundos
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 2000);
-            } else {
-                showAlert('CPF ou senha incorretos. Tente novamente.', 'error');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (e) {
+            // Verificar CPF
+            const cpf = cpfInput.value.replace(/\D/g, '');
+            if (cpf.length !== 11) {
+                showAlert('CPF deve conter exatamente 11 dígitos.', 'error');
+                cpfInput.focus();
+                e.preventDefault(); // Só previne se houver erro
+                return;
             }
-        }, 2000);
-    });
 
-    // Função para simular login (remover em produção)
-    function simulateLogin(cpf, senha) {
-        // Em produção, isso seria uma requisição AJAX para o backend
-        // Aqui estamos apenas simulando um login bem-sucedido
-        const testCPF = '12345678909';
-        const testPassword = '123456';
+            // Verificar senha
+            const senha = document.getElementById('senha').value;
+            if (senha.length < 6) {
+                showAlert('A senha deve ter pelo menos 6 caracteres.', 'error');
+                document.getElementById('senha').focus();
+                e.preventDefault(); // Só previne se houver erro
+                return;
+            }
 
-        return cpf === testCPF && senha === testPassword;
+            // Se todas as validações passarem, o formulário será enviado normalmente
+            // para a controller sem intervenção do JavaScript
+
+            // Opcional: Mostrar loading (sem impedir o envio)
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Entrando...';
+                submitBtn.disabled = true;
+
+                // Reativar o botão se houver algum erro no envio (timeout de segurança)
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 5000);
+            }
+        });
     }
 
     // Sistema de alertas
@@ -149,36 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, 5000);
     }
-
-    // Login com Google (simulação)
-    document.querySelector('.btn-google').addEventListener('click', function () {
-        showAlert('Redirecionando para autenticação com Google...', 'info');
-        // Em produção: window.location.href = '/auth/google';
-    });
-
-    // Login com Facebook (simulação)
-    document.querySelector('.btn-facebook').addEventListener('click', function () {
-        showAlert('Redirecionando para autenticação com Facebook...', 'info');
-        // Em produção: window.location.href = '/auth/facebook';
-    });
-
-    // Verificar se há credenciais salvas
-    const savedCPF = localStorage.getItem('savedCPF');
-    const rememberMe = document.getElementById('lembrar');
-
-    if (savedCPF && rememberMe.checked) {
-        cpfInput.value = savedCPF;
-        document.getElementById('senha').focus();
-    }
-
-    // Salvar CPF se "Lembrar-me" estiver marcado
-    loginForm.addEventListener('submit', function () {
-        if (rememberMe.checked) {
-            localStorage.setItem('savedCPF', cpfInput.value);
-        } else {
-            localStorage.removeItem('savedCPF');
-        }
-    });
 
     // Efeitos visuais nos inputs
     const inputs = document.querySelectorAll('.form-control-custom');

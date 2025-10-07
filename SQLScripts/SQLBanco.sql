@@ -2,20 +2,21 @@ drop database db_palestra;
 create database db_palestra;
 use db_palestra;
 
-create table Eventos(
-	id_evento int auto_increment,
-    nome_evento varchar(255) not null,
-    nome_area varchar(255),
-    data date not null,
-    inscricao_ativa bool,
-    imagem_evento longblob,
-    primary key(id_evento)
-);
-
 create table AreaAtuacao(
 	id_area int auto_increment,
     nome_area varchar(255),
     primary key(id_area)
+);
+
+create table Eventos(
+	id_evento int auto_increment,
+    nome_evento varchar(255) not null,
+    data date not null,
+    inscricao_ativa bool,
+    imagem_evento longblob,
+	id_area int,
+    foreign key(id_area) references AreaAtuacao(id_area),
+    primary key(id_evento)
 );
 
 create table Palestrantes(

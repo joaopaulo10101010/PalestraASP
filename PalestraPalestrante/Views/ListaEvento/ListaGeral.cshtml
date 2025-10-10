@@ -80,9 +80,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a asp-area="" asp-controller="ListaEvento" asp-action="CadastrarPalestra">
                             <i class="fas fa-cog"></i>
-                            <span>Configurações</span>
+                            <span>Cadastrar Palestra</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -224,9 +224,24 @@
                                 </div>
                                 <div class="palestra-footer">
                                     <span class="palestra-price">100% Gratis</span>
-                                    <button class="btn-inscrever">
-                                        <i class="fas fa-user-plus me-2"></i>Inscrever-se
-                                    </button>
+                                    @switch(@Context.Session.GetString(SessionKeys.cargo_usuario)){
+                                        case "Admin":
+                                            <button class="btn-inscrever" onclick="@ViewBag.id_evento = @item.id_evento">
+                                                <i class="fas fa-user-plus me-2"></i>Excluir
+                                            </button>
+                                            break;
+                                        case "Participante":
+                                            <button class="btn-inscrever" onclick="@ViewBag.id_evento = @item.id_evento">
+                                                <i class="fas fa-user-plus me-2"></i>Inscrever-se
+                                            </button>
+                                            break;
+                                        default:
+                                            <button class="btn-inscrever">
+                                                <i class="fas fa-user-plus me-2"></i>Detalhes
+                                            </button>
+                                            break;
+
+                                    }
                                 </div>
                             </div>
                         }

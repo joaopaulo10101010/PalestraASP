@@ -51,5 +51,23 @@ namespace PalestraPalestrante.Controllers
 
             return RedirectToAction("ListaGeral");
         }
+
+        public IActionResult CadastrarPalestra()
+        {
+            return View(listaRepositorio.PegarListaArea());
+        }
+        [HttpPost]
+        public IActionResult CadastrarPalestra(string descricao_palestra, int id_area)
+        {
+            Palestra palestra = new Palestra()
+            {
+                id_area = id_area,
+                id_evento = @ViewBag.id_evento,
+                descricao_palestra = descricao_palestra,
+                id_palestrante = @ViewBag.id_palestrante
+            };
+            listaRepositorio.AdicionarNovoPalestra(palestra);
+            return View(listaRepositorio.PegarListaArea());
+        }
     }
 }

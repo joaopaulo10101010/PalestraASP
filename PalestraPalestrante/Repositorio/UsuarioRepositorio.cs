@@ -25,11 +25,12 @@ namespace PalestraPalestrante.Repositorio
                 {
                     using (MySqlCommand cmd = db.MySqlCommand())
                     {
-                        cmd.CommandText = "insert into Usuario(cpf_usuario,nome_usuario,email_usuario,senha_usuario) values (@cpf,@nome,@email,@senha)";
+                        cmd.CommandText = "insert into Usuario(cpf_usuario,nome_usuario,email_usuario,senha_usuario,cargo_usuario) values (@cpf,@nome,@email,@senha,@cargo)";
                         cmd.Parameters.AddWithValue("@cpf", usuario.GetCpf());
                         cmd.Parameters.AddWithValue("@nome", usuario.GetNome());
                         cmd.Parameters.AddWithValue("@email", usuario.GetEmail());
                         cmd.Parameters.AddWithValue("@senha", usuario.GetSenha());
+                        cmd.Parameters.AddWithValue("@cargo", usuario.GetCargo());
                         cmd.ExecuteNonQuery();
                     }
                 }

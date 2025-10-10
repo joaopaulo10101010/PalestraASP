@@ -129,6 +129,30 @@ namespace PalestraPalestrante.Repositorio
             }
         }
 
+        public void AdicionarNovoPalestra(Palestra palestra)
+        {
+            try
+            {
+                using (Conexao db = new Conexao(_connectionString))
+                {
+                    using (MySqlCommand cmd = db.MySqlCommand())
+                    {
+                        cmd.CommandText = "insert into Palestras(id_evento,id_palestrante,descricao_palestra,id_area) values (@idevento,@idpales,@desc,@area)";
+                        cmd.Parameters.AddWithValue("@idevento", palestra.id_evento);
+                        cmd.Parameters.AddWithValue("@idpales", palestra.id_palestrante);
+                        cmd.Parameters.AddWithValue("@desc", palestra.descricao_palestra);
+                        cmd.Parameters.AddWithValue("@area", palestra.id_area);
+                        cmd.ExecuteNonQuery();
+                    }
+                    Console.WriteLine("Evento Cadastrado com sucesso");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"O correu um erro: {ex.Message}");
+            }
+        }
+
 
 
 

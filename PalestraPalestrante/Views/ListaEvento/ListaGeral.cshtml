@@ -1,4 +1,6 @@
-﻿@using PalestraPalestrante.Authenticacao;
+﻿@model PalestraPalestrante.Models.ListaGeral;
+
+@using PalestraPalestrante.Authenticacao;
 @using System.Text.RegularExpressions
 @{
     Layout = null;
@@ -46,7 +48,7 @@
                         <div class="user-detail">
                             <i class="fas fa-id-card"></i>
                             <span id="userCPF">CPF: @Regex.Replace(@Context.Session.GetString(SessionKeys.cpf_usuario), @"^(\d{3})(\d{3})(\d{3})(\d{2})$", "$1.$2.$3-$4")</span>
-                            
+
                         </div>
                         <div class="user-detail">
                             <i class="fas fa-briefcase"></i>
@@ -72,9 +74,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#">
+                        <a asp-area="" asp-controller="ListaEvento" asp-action="CadastroEvento">
                             <i class="fas fa-certificate"></i>
-                            <span>Meus Certificados</span>
+                            <span>Criar Evento</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -208,7 +210,28 @@
                 </div>
 
                 <div class="palestras-grid" id="palestrasGrid">
-                    <!-- Os cards serão inseridos aqui via JavaScript -->
+                    @{
+                        foreach(var item in Model.eventos)
+                        {
+                            <div class="palestra-image">
+                                <img src="@item.caminho_imagem">
+                                <div class="palestra-badge">@foreach (var p in Model.arealist) { if (p.Id_area == item.id_area) { @p.nome } }</div>
+                            </div>
+                            <div class="palestra-content">
+                                <h4>@item.nome_evento</h4>
+                                <div class="palestra-info">
+                                    <div><i class="fas fa-calendar"></i>@item.data.Day / @item.data.Month / @item.data.Year</div>
+                                </div>
+                                <div class="palestra-footer">
+                                    <span class="palestra-price">100% Gratis</span>
+                                    <button class="btn-inscrever">
+                                        <i class="fas fa-user-plus me-2"></i>Inscrever-se
+                                    </button>
+                                </div>
+                            </div>
+                        }
+
+                    }
                 </div>
 
                 <!-- Loading State -->

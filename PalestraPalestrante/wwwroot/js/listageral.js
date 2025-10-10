@@ -1,84 +1,5 @@
 ﻿// Dados de exemplo (em produção, viriam do backend)
-const palestrasData = [
-    {
-        id: 1,
-        nome: "Inteligência Artificial na Prática",
-        data: "2024-12-20",
-        imagem: "../assets/image/palestras/ai-practice.jpg",
-        categoria: "Tecnologia",
-        tipo: "online",
-        descricao: "Aprenda a aplicar IA em projetos reais com cases práticos e implementações.",
-        preco: "Grátis",
-        horario: "14:00 - 16:00",
-        local: "Online",
-        vagas: 45
-    },
-    {
-        id: 2,
-        nome: "Liderança em Times Remotos",
-        data: "2024-12-22",
-        imagem: "../assets/image/palestras/remote-leadership.jpg",
-        categoria: "Liderança",
-        tipo: "presencial",
-        descricao: "Estratégias eficazes para gerenciar e motivar equipes distribuídas.",
-        preco: "R$ 89,90",
-        horario: "09:00 - 12:00",
-        local: "São Paulo - SP",
-        vagas: 30
-    },
-    {
-        id: 3,
-        nome: "Marketing Digital 2024",
-        data: "2024-12-25",
-        imagem: "../assets/image/palestras/digital-marketing.jpg",
-        categoria: "Marketing",
-        tipo: "hibrido",
-        descricao: "Tendências e estratégias que estão revolucionando o marketing digital.",
-        preco: "R$ 49,90",
-        horario: "16:00 - 18:00",
-        local: "Online/Presencial",
-        vagas: 100
-    },
-    {
-        id: 4,
-        nome: "Desenvolvimento Pessoal e Profissional",
-        data: "2024-12-28",
-        imagem: "../assets/image/palestras/personal-dev.jpg",
-        categoria: "Desenvolvimento Pessoal",
-        tipo: "online",
-        descricao: "Técnicas para maximizar seu potencial e alcançar seus objetivos.",
-        preco: "Grátis",
-        horario: "19:00 - 21:00",
-        local: "Online",
-        vagas: 200
-    },
-    {
-        id: 5,
-        nome: "Inovação em Startups",
-        data: "2024-12-30",
-        imagem: "../assets/image/palestras/startup-innovation.jpg",
-        categoria: "Negócios",
-        tipo: "presencial",
-        descricao: "Como criar e escalar startups inovadoras no mercado atual.",
-        preco: "R$ 129,90",
-        horario: "10:00 - 13:00",
-        local: "Rio de Janeiro - RJ",
-        vagas: 25
-    },
-    {
-        id: 6,
-        nome: "Data Science para Negócios",
-        data: "2025-01-05",
-        imagem: "../assets/image/palestras/data-science.jpg",
-        categoria: "Tecnologia",
-        tipo: "online",
-        descricao: "Transforme dados em insights valiosos para decisões estratégicas.",
-        preco: "R$ 79,90",
-        horario: "15:00 - 17:30",
-        local: "Online",
-        vagas: 75
-    }
-];
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -94,66 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
     setupSearchAndFilters();
 });
 
-function loadPalestras(palestras = palestrasData) {
-    const grid = document.getElementById('palestrasGrid');
-    const loadingState = document.getElementById('loadingState');
-    const emptyState = document.getElementById('emptyState');
-
-    // Mostrar loading
-    loadingState.style.display = 'block';
-    emptyState.style.display = 'none';
-    grid.innerHTML = '';
-
-    // Simular carregamento
-    setTimeout(() => {
-        loadingState.style.display = 'none';
-
-        if (palestras.length === 0) {
-            emptyState.style.display = 'block';
-            return;
-        }
-
-        palestras.forEach(palestra => {
-            const card = createPalestraCard(palestra);
-            grid.appendChild(card);
-        });
-    }, 1000);
-}
-
-function createPalestraCard(palestra) {
-    const card = document.createElement('div');
-    card.className = 'palestra-card';
-    card.innerHTML = `
-        <div class="palestra-image">
-            <img src="${palestra.imagem}" alt="${palestra.nome}" onerror="this.src='../assets/image/palestras/default.jpg'">
-            <div class="palestra-badge">${palestra.categoria}</div>
-        </div>
-        <div class="palestra-content">
-            <h4>${palestra.nome}</h4>
-            <div class="palestra-info">
-                <div><i class="fas fa-calendar"></i>${formatDate(palestra.data)}</div>
-                <div><i class="fas fa-clock"></i>${palestra.horario}</div>
-                <div><i class="fas fa-map-marker-alt"></i>${palestra.local}</div>
-                <div><i class="fas fa-users"></i>${palestra.vagas} vagas</div>
-            </div>
-            <p class="palestra-desc">${palestra.descricao}</p>
-            <div class="palestra-footer">
-                <span class="palestra-price">${palestra.preco}</span>
-                <button class="btn-inscrever" data-palestra-id="${palestra.id}" data-palestra-nome="${palestra.nome}" data-palestra-data="${palestra.data}">
-                    <i class="fas fa-user-plus me-2"></i>Inscrever-se
-                </button>
-            </div>
-        </div>
-    `;
-
-    return card;
-}
 
 function formatDate(dateString) {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     const date = new Date(dateString);
     return date.toLocaleDateString('pt-BR', options);
 }
+
 
 function setupEventListeners() {
     // Logout

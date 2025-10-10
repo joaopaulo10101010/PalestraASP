@@ -137,9 +137,9 @@ namespace PalestraPalestrante.Repositorio
                 {
                     using (MySqlCommand cmd = db.MySqlCommand())
                     {
-                        cmd.CommandText = "insert into Palestras(id_evento,id_palestrante,descricao_palestra,id_area) values (@idevento,@idpales,@desc,@area)";
+                        cmd.CommandText = "insert into Palestras(id_evento,cpf_usuario,descricao_palestra,id_area) values (@idevento,@cpf_usuario,@desc,@area)";
                         cmd.Parameters.AddWithValue("@idevento", palestra.id_evento);
-                        cmd.Parameters.AddWithValue("@idpales", palestra.id_palestrante);
+                        cmd.Parameters.AddWithValue("@cpf_usuario", palestra.cpf_usuario);
                         cmd.Parameters.AddWithValue("@desc", palestra.descricao_palestra);
                         cmd.Parameters.AddWithValue("@area", palestra.id_area);
                         cmd.ExecuteNonQuery();

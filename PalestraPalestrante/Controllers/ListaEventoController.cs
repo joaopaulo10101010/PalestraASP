@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using PalestraPalestrante.Authenticacao;
 using PalestraPalestrante.Models;
 using PalestraPalestrante.Repositorio;
 
@@ -64,7 +66,7 @@ namespace PalestraPalestrante.Controllers
                 id_area = id_area,
                 id_evento = @ViewBag.id_evento,
                 descricao_palestra = descricao_palestra,
-                id_palestrante = @ViewBag.id_palestrante
+                cpf_usuario = HttpContext.Session.GetString(SessionKeys.cpf_usuario)
             };
             listaRepositorio.AdicionarNovoPalestra(palestra);
             return View(listaRepositorio.PegarListaArea());

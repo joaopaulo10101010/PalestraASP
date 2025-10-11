@@ -23,7 +23,7 @@ namespace WebApplication3.Authenticacao
 
             {
 
-                context.Result = new RedirectToActionResult("Login", "Auth", null);
+                context.Result = new RedirectToActionResult("Login", "Usuario", null);
 
                 return;
 
@@ -39,7 +39,7 @@ namespace WebApplication3.Authenticacao
 
                 {
 
-                    context.Result = new RedirectToActionResult("AcessoNegado", "Auth", null);
+                    context.Result = new RedirectToActionResult("ListaGeral", "ListaEvento", null);
 
                     return;
 

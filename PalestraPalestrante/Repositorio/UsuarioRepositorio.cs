@@ -82,5 +82,64 @@ namespace PalestraPalestrante.Repositorio
             }
         }
 
+
+        public List<Usuario> PegarListaUsuario()
+        {
+            try
+            {
+                List<Usuario> lista = new List<Usuario>();
+                using (Conexao db = new Conexao(_connectionString))
+                {
+                    using (MySqlCommand cmd = db.MySqlCommand())
+                    {
+                        cmd.CommandText = "select * from Usuario";
+                        var rd = cmd.ExecuteReader();
+                        while (rd.Read())
+                        {
+                            Usuario dbusuario = new Usuario(
+                                rd.GetString("cpf_usuario"),
+                                rd.GetString("nome_usuario"),
+                                rd.GetString("email_usuario"),
+                                rd.GetString("senha_usuario"),
+                                rd.GetString("cargo_usuario")
+                                );
+                            dbusuario.SetDataCadastro(rd.GetDateTime("data_cadastro_usuario"));
+
+                            lista.Add(dbusuario);
+
+                        }
+                        return lista;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+                return null;
+            }
+        }
+
+        public bool ApagarUsuario(string cpf)
+        {
+            try
+            {
+                using (Conexao db = new Conexao(_connectionString))
+                {
+                    using (MySqlCommand cmd = db.MySqlCommand())
+                    {
+                        cmd.CommandText = "Delete from Usuario where cpf_usuario=@cpf";
+                        cmd.Parameters.AddWithValue("@cpf", cpf);
+                        cmd.ExecuteNonQuery();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+                return false;
+            }
+        }
+
     }
 }

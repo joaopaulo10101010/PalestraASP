@@ -72,10 +72,12 @@
             </div>
 
             <div class="form-card">
+                @TempData["cadastropalestra"]
                 <form id="palestraForm" method="post" asp-action="CadastrarPalestra">
+                    <input type="hidden" name="id_evento" value="@ViewBag.id_evento"/>
                     <div class="form-group">
                         <label for="areaPalestra" class="form-label">Área da Palestra</label>
-                        <select class="form-select" id="id_area" name="tipoarea" required>
+                        <select class="form-select" id="id_area" name="id_area" required>
                             @{
                                 foreach(var item in Model)
                                 {

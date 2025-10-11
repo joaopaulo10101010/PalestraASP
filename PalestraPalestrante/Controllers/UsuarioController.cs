@@ -6,6 +6,7 @@ using PalestraPalestrante.Authenticacao;
 using PalestraPalestrante.Models;
 using PalestraPalestrante.Repositorio;
 using System.Data;
+using WebApplication3.Authenticacao;
 
 namespace PalestraPalestrante.Controllers
 {
@@ -76,6 +77,28 @@ namespace PalestraPalestrante.Controllers
                 return RedirectToAction("ListaGeral", "ListaEvento");
             }
             TempData["LoginLog"] = "Login Incorreto";
+            return View();
+        }
+
+
+        [SessionAuthorize(RoleAnyOf = "Admin")]
+        public IActionResult GerenciarUsuario()
+        {
+
+            return View(usuarioRepositorio.PegarListaUsuario());
+        }
+
+        public IActionResult RemoverUsuario(string id)
+        {
+            if (usuarioRepositorio.ApagarUsuario(id))
+            {
+                TempData["MenssagemGerenciaUsuario"] = "Usuario Removido com sucesso";
+            }
+            else
+            {
+                TempData["MenssagemGerenciaUsuario"] = "Não foi possivel Remover esse Usuario";
+            }
+
             return View();
         }
 

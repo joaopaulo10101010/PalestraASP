@@ -61,36 +61,53 @@
             <!-- Menu de Navegação -->
             <nav class="sidebar-nav">
                 <ul>
-                    <li class="nav-item active">
-                        <a href="#">
-                            <i class="fas fa-home"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">
-                            <i class="fas fa-calendar-check"></i>
-                            <span>Minhas Inscrições</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-area="" asp-controller="ListaEvento" asp-action="CadastroEvento">
-                            <i class="fas fa-certificate"></i>
-                            <span>Criar Evento</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-area="" asp-controller="ListaEvento" asp-action="CadastrarPalestra">
-                            <i class="fas fa-cog"></i>
-                            <span>Cadastrar Palestra</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" id="logoutBtn">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <span>Sair</span>
-                        </a>
-                    </li>
+                    @{
+                        switch (@Context.Session.GetString(SessionKeys.cargo_usuario))
+                        {
+                            case "Admin":
+
+                                <li class="nav-item">
+                                    <a href="#Topo">
+                                        <i class="fas fa-certificate"></i>
+                                        <span>Subir para o Topo</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Usuario" asp-action="GerenciarUsuario">
+                                        <i class="fas fa-certificate"></i>
+                                        <span>Gerenciar Usuario</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="ListaEvento" asp-action="CadastroEvento">
+                                        <i class="fas fa-certificate"></i>
+                                        <span>Criar Evento</span>
+                                    </a>
+                                </li>
+
+                                break;
+                            case "Participante":
+                                <li class="nav-item">
+                                    <a href="#Topo">
+                                        <i class="fas fa-certificate"></i>
+                                        <span>Subir para o Topo</span>
+                                    </a>
+                                </li>
+
+                                break;
+                            case "Publico":
+                                <li class="nav-item">
+                                    <a href="#Topo">
+                                        <i class="fas fa-certificate"></i>
+                                        <span>Subir para o Topo</span>
+                                    </a>
+                                </li>
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    
                 </ul>
             </nav>
 
@@ -206,7 +223,8 @@
                 <!-- Palestras Grid -->
                 <div class="section-header">
                     <h3>Palestras Disponíveis</h3>
-                    <p>Encontre o próximo evento que vai transformar sua carreira</p>
+                    <p id="topo">Encontre o próximo evento que vai transformar sua carreira</p>
+                    @TempData["MenssagemGerenciaEvento"]
                 </div>
 
                 <div class="palestras-grid" id="palestrasGrid">
@@ -226,14 +244,14 @@
                                     <span class="palestra-price">100% Gratis</span>
                                     @switch(@Context.Session.GetString(SessionKeys.cargo_usuario)){
                                         case "Admin":
-                                            <button class="btn-inscrever" onclick="@ViewBag.id_evento = @item.id_evento">
+                                            <a asp-controller="ListaEvento" asp-action="DeletarEvento" asp-route-id_evento="@item.id_evento" class="btn-inscrever" onclick="@ViewBag.id_evento = @item.id_evento">
                                                 <i class="fas fa-user-plus me-2"></i>Excluir
-                                            </button>
+                                            </a>
                                             break;
                                         case "Participante":
-                                            <button class="btn-inscrever" onclick="@ViewBag.id_evento = @item.id_evento">
-                                                <i class="fas fa-user-plus me-2"></i>Inscrever-se
-                                            </button>
+                                            <a asp-controller="ListaEvento" asp-action="CadastrarPalestra" class="btn-inscrever" asp-route-id_evento="@item.id_evento">
+                                                <i class="fas fa-user-plus me-2"></i>Palestrar
+                                            </a>
                                             break;
                                         default:
                                             <button class="btn-inscrever">

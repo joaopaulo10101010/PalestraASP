@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using PalestraPalestrante.Authenticacao;
 using PalestraPalestrante.Models;
 using PalestraPalestrante.Repositorio;
+using WebApplication3.Authenticacao;
 
 namespace PalestraPalestrante.Controllers
 {
+    [SessionAuthorize(RoleAnyOf = "Admin, Participante, Publico")]
     public class ListaEventoController : Controller
     {
         private readonly ListaRepositorio listaRepositorio;
@@ -28,12 +30,14 @@ namespace PalestraPalestrante.Controllers
 
             return View(lista);
         }
-
+        
+        [SessionAuthorize(RoleAnyOf = "Admin")]
         public IActionResult CadastroEvento()
         {
             return View(listaRepositorio.PegarListaArea());
         }
 
+        [SessionAuthorize(RoleAnyOf = "Admin")]
         [HttpPost]
         public IActionResult CadastroEvento(string nomeEvento, DateTime dataEvento, string areaTecnica, IFormFile imagemEvento)
         {
@@ -54,22 +58,53 @@ namespace PalestraPalestrante.Controllers
             return RedirectToAction("ListaGeral");
         }
 
-        public IActionResult CadastrarPalestra()
+
+        [SessionAuthorize(RoleAnyOf = "Admin, Participante")]
+        public IActionResult CadastrarPalestra(int id_evento)
         {
+            ViewBag.id_evento = id_evento;
+
             return View(listaRepositorio.PegarListaArea());
         }
+
+        [SessionAuthorize(RoleAnyOf = "Admin, Participante")]
         [HttpPost]
-        public IActionResult CadastrarPalestra(string descricao_palestra, int id_area)
+        public IActionResult CadastrarPalestra(string descricao_palestra, int id_area, int id_evento)
         {
-            Palestra palestra = new Palestra()
+            try
             {
-                id_area = id_area,
-                id_evento = @ViewBag.id_evento,
-                descricao_palestra = descricao_palestra,
-                cpf_usuario = HttpContext.Session.GetString(SessionKeys.cpf_usuario)
-            };
-            listaRepositorio.AdicionarNovoPalestra(palestra);
-            return View(listaRepositorio.PegarListaArea());
+                Palestra palestra = new Palestra()
+                {
+                    id_area = id_area,
+                    id_evento = id_evento,
+                    descricao_palestra = descricao_palestra,
+                    cpf_usuario = HttpContext.Session.GetString(SessionKeys.cpf_usuario)
+                };
+                listaRepositorio.AdicionarNovoPalestra(palestra);
+                TempData["cadastropalestra"] = "Cadastro realizado com sucesso";
+            }
+            catch(Exception ex)
+            {
+                TempData["cadastropalestra"] = $"Ocorreu um erro no cadastro: {ex.Message}";
+                return View();
+            }
+
+
+            return RedirectToAction("ListaGeral");
+        }
+        [SessionAuthorize(RoleAnyOf = "Admin")]
+        public IActionResult DeletarEvento(int id_evento)
+        {
+            if (listaRepositorio.ApagarEvento(id_evento))
+            {
+                TempData["MenssagemGerenciaEvento"] = "Evento Removido com sucesso";
+            }
+            else
+            {
+                TempData["MenssagemGerenciaEvento"] = "Não foi possivel Remover esse Evento";
+            }
+
+            return RedirectToAction("ListaGeral","ListaEvento");
         }
     }
 }

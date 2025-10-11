@@ -154,7 +154,27 @@ namespace PalestraPalestrante.Repositorio
         }
 
 
-
+        public bool ApagarEvento(int id)
+        {
+            try
+            {
+                using (Conexao db = new Conexao(_connectionString))
+                {
+                    using (MySqlCommand cmd = db.MySqlCommand())
+                    {
+                        cmd.CommandText = "Delete from Eventos where id_evento=@id";
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+                return false;
+            }
+        }
 
 
 

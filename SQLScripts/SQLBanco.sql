@@ -23,7 +23,7 @@ create table Palestras(
 	id_palestra int auto_increment primary key,
     id_evento int,
     cpf_usuario char(11),
-    descricao_palestra varchar(500),
+    descricao_palestra varchar(1000),
 	id_area int,
     foreign key(id_area) references AreaAtuacao(id_area),
     foreign key(id_evento) references Eventos(id_evento),
@@ -40,8 +40,11 @@ create table Usuario(
     primary key(cpf_usuario)
 );
 
-insert into Usuario(cpf_usuario,nome_usuario,email_usuario,senha_usuario) values
-("","","","");
+insert into Usuario(cpf_usuario,nome_usuario,email_usuario,senha_usuario,cargo_usuario) values
+("00000000000","admin","admin@admin","admin","Admin");
+
+
+delete from Usuario where cpf_usuario='0';
 
 INSERT INTO AreaAtuacao (nome_area) VALUES ('Tecnologia da Informação');
 INSERT INTO AreaAtuacao (nome_area) VALUES ('Engenharia');
@@ -54,5 +57,6 @@ INSERT INTO AreaAtuacao (nome_area) VALUES ('Finanças');
 INSERT INTO AreaAtuacao (nome_area) VALUES ('Logística');
 INSERT INTO AreaAtuacao (nome_area) VALUES ('Design Gráfico');
 
-
+/* pt.id_palestra, pt.id_evento,pt.cpf_usuario,pt.descricao_palestra,id_area */
 select * from Usuario;
+select pt.cpf_usuario, pt.descricao_palestra, ev.nome_evento, ev.data, us.nome_usuario, us.email_usuario, us.cargo_usuario, aa.nome_area from Palestras pt inner join Eventos ev on pt.id_evento=ev.id_evento inner join Usuario us on us.cpf_usuario=pt.cpf_usuario inner join AreaAtuacao aa on pt.id_area=aa.id_area where pt.id_evento = 1;

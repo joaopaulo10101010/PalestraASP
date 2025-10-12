@@ -21,6 +21,12 @@ namespace PalestraPalestrante.Controllers
             return View();
         }
 
+        [SessionAuthorize(RoleAnyOf = "Admin, Publico")]
+        public IActionResult PalestrantesEvento(int id_evento)
+        {
+            return View(listaRepositorio.PegarEvento(id_evento));
+        }
+        [SessionAuthorize(RoleAnyOf = "Admin, Participante, Publico")]
         public IActionResult ListaGeral()
         {
             ListaGeral lista = new ListaGeral();

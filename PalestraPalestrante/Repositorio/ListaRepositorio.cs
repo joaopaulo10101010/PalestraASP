@@ -1,6 +1,7 @@
-﻿using PalestraPalestrante.Models;
-using PalestraPalestrante.Database;
+﻿using Microsoft.AspNetCore.Hosting.Server;
 using MySql.Data.MySqlClient;
+using PalestraPalestrante.Database;
+using PalestraPalestrante.Models;
 using System.Data;
 
 namespace PalestraPalestrante.Repositorio
@@ -176,7 +177,49 @@ namespace PalestraPalestrante.Repositorio
             }
         }
 
+        public List<PalestrantesLista> PegarEvento(int id)
+        {
+            List<PalestrantesLista> lista = new List<PalestrantesLista>();
+            try
+            {
+                using (Conexao db = new Conexao(_connectionString))
+                {
+                    using (MySqlCommand cmd = db.MySqlCommand())
+                    {
+                        cmd.CommandText = "select" +
+                            " pt.cpf_usuario, pt.descricao_palestra, ev.nome_evento, ev.data, us.nome_usuario, us.email_usuario, us.cargo_usuario, " +
+                            "aa.nome_area from Palestras pt inner join Eventos ev on pt.id_evento=ev.id_evento " +
+                            "inner join Usuario us on us.cpf_usuario=pt.cpf_usuario inner join AreaAtuacao aa on pt.id_area=aa.id_area where pt.id_evento = 1;";
+                        cmd.Parameters.AddWithValue ("@id", id);
+                        var rd = cmd.ExecuteReader();
+                        while (rd.Read())
+                        {
+                            PalestrantesLista newpalestra = new PalestrantesLista()
+                            {
+                                cpf_usuario = rd.GetString("cpf_usuario"),
+                                descricao_palestra = rd.GetString("descricao_palestra"),
+                                nome_evento = rd.GetString("nome_evento"),
+                                nome_usuario = rd.GetString("nome_usuario"),
+                                email_usuario = rd.GetString("email_usuario"),
+                                cargo_usuario = rd.GetString("cargo_usuario"),
+                                nome_area = rd.GetString("nome_area"),
+                                data = rd.GetDateTime("data"),
+                            };
 
+                            lista.Add(newpalestra);
+                        }
+                    }
+
+                }
+                return lista;
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+                return null;
+            }
+        }
 
     }
 }

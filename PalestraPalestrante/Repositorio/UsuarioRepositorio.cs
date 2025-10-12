@@ -39,7 +39,7 @@ namespace PalestraPalestrante.Repositorio
             catch (Exception ex)
             {
                 Console.WriteLine($"O correu um erro: {ex.Message}");
-                return false;
+                throw ex;
             }
         }
 

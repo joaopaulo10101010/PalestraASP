@@ -224,7 +224,21 @@
                 <div class="section-header">
                     <h3>Palestras Disponíveis</h3>
                     <p id="topo">Encontre o próximo evento que vai transformar sua carreira</p>
-                    @TempData["MenssagemGerenciaEvento"]
+                    @{
+                        switch (@Context.Session.GetString(SessionKeys.cargo_usuario))
+                        {
+                            case "Admin":
+                                @TempData["MenssagemGerenciaEvento"]
+                                break;
+                            case "Participante":
+                                @TempData["cadastropalestra"]
+                                break;
+                            default:
+                                @TempData["Inscricaopublico"]
+                                break;
+
+                        }
+                    }
                 </div>
 
                 <div class="palestras-grid" id="palestrasGrid">
@@ -254,9 +268,9 @@
                                             </a>
                                             break;
                                         default:
-                                            <button class="btn-inscrever">
+                                            <a asp-controller="ListaEvento" asp-action="PalestrantesEvento" class="btn-inscrever" asp-route-id_evento="@item.id_evento">
                                                 <i class="fas fa-user-plus me-2"></i>Detalhes
-                                            </button>
+                                            </a>
                                             break;
 
                                     }

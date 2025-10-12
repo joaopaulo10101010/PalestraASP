@@ -34,25 +34,24 @@ namespace PalestraPalestrante.Controllers
 
             try
             {
-                if (senha == confirmarSenha)
-                {
-                    cpf = cpf.Replace(".", "").Replace("-", "");
-                    Usuario usuario = new Usuario(cpf, nome, email, senha, tipoUsuario);
-                    usuarioRepositorio.CadastrarNovoUsuarioBase(usuario);
-                    ViewBag.CadastroLog = "Cadastro Realizado com sucesso";
-                    return RedirectToAction("Login");
-                }
-                else
+                if (senha != confirmarSenha)
                 {
                     ViewBag.CadastroLog = "As senhas não são iguais, confirme elas novamente";
                     return View();
                 }
+
+                cpf = cpf.Replace(".", "").Replace("-", "");
+                Usuario usuario = new Usuario(cpf, nome, email, senha, tipoUsuario);
+                usuarioRepositorio.CadastrarNovoUsuarioBase(usuario);
+                ViewBag.CadastroLog = "Cadastro Realizado com sucesso";
+                return RedirectToAction("Login");
             }
             catch(Exception ex)
             {
+                ViewBag.CadastroLog = "Não foi possivel realizar esse cadastro, tente outro CPF";
                 Console.WriteLine($"occoreu um erro: {ex.Message}");
-                TempData["CadastroLog"] = "As senhas não são iguais, confirme elas novamente";
-                return View();
+                TempData["CadastroLog"] = "Não foi possivel realizar esse cadastro, tente outro CPF";
+                return RedirectToAction("CadastrarUsuario","Usuario");
             }
 
         }
@@ -60,6 +59,17 @@ namespace PalestraPalestrante.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        public IActionResult Sair()
+        {
+            HttpContext.Session.SetString(SessionKeys.cpf_usuario, "");
+            HttpContext.Session.SetString(SessionKeys.nome_usuario, "");
+            HttpContext.Session.SetString(SessionKeys.email_usuario, "");
+            HttpContext.Session.SetString(SessionKeys.cargo_usuario, "");
+            HttpContext.Session.SetString(SessionKeys.data_cadastro_usuario, "");
+
+            return RedirectToAction("Home","Home");
         }
 
         [HttpPost]
